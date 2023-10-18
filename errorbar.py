@@ -40,7 +40,7 @@ phi_tick = np.zeros(len(fileList))
 for i in range (0, len(fileList)):
     data = np.loadtxt(fileList[i], delimiter = ',', skiprows = 1)
     z = data[:] #does not take solar height into account
-    zarry = list(filter((-999.7).__ne__, z)) ### remove all the -999.7 from the list
+    zarry = list(z) 
     
     N = len(zarry)
     hist = np.zeros(numBins)
@@ -58,7 +58,7 @@ for i in range (0, len(fileList)):
     zf = tickMarks*lowpassz
     avez[i] = np.sum(zf)/np.sum(lowpassz)
 
-
+### Plot every radial bin
 ##    plt.plot(tickMarks, xspaceData, 'b-', markersize = 0.1)
 ##    plt.plot(tickMarks, lowpassz, 'k.', markersize = 1.4)
 ##    plt.plot(tickMarks, nhist, 'r--', markersize = 0.1)
@@ -69,10 +69,10 @@ for i in range (0, len(fileList)):
 ##    plt.title('odd cutoff 0.5__even cutoff 0')
 ##    plt.show()
 
-##      plt.plot(freq, kspaceData.real)
+##      plt.plot(freq, kspaceData.real) ### plot frequency and kspaceData
 ##      plt.show()
 
-    # compute error bar
+    ### Compute the errorbar
     Sn = np.sqrt(hist) #sigma_norm
     multiplier = tickMarks*Sn
     Multiplier = sum(multiplier**2)
@@ -80,17 +80,17 @@ for i in range (0, len(fileList)):
     
    
 
-    # phi tickMarks
+    ### Set up phi tickMarks
     R_tick = [8.05, 8.15, 8.25, 8.35, 8.45, 8.55, 8.65, 8.75, 8.85, 8.95,
               9.05, 9.15, 9.25, 9.35, 9.45, 9.55, 9.65, 9.75, 9.85, 9.95,
               10.05,10.15,10.25,10.35,10.45,10.55,10.65,10.75,10.85,10.95,
               11.05,11.15,11.25,11.35,11.45,11.55,11.65,11.75,11.85,11.95]
 
 
-##print (S_avez)
-##print (avez)
+print (S_avez)
+print (avez)
 
-
+### Plot OLPF'd average vertical height against radial distance R
 plt.errorbar(R_tick, avez, S_avez, marker = '.', ls = 'none')
 plt.title('Error bars for R[8.0, 12.0] l[225, 245] with G & b cuts')
 plt.xlabel('R (kpc)')
