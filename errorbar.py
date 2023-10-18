@@ -5,28 +5,9 @@ import random
 from scipy.optimize import curve_fit
 
 
-fileList = ['8_8.1_trimmed.csv', '8.1_8.2_trimmed.csv',
-            '8.2_8.3_trimmed.csv', '8.3_8.4_trimmed.csv',
-            '8.4_8.5_trimmed.csv', '8.5_8.6_trimmed.csv',
-            '8.6_8.7_trimmed.csv', '8.7_8.8_trimmed.csv',
-            '8.8_8.9_trimmed.csv', '8.9_9.0_trimmed.csv',
-            '9.0_9.1_trimmed.csv', '9.1_9.2_trimmed.csv',
-            '9.2_9.3_trimmed.csv', '9.3_9.4_trimmed.csv',
-            '9.4_9.5_trimmed.csv', '9.5_9.6_trimmed.csv',
-            '9.6_9.7_trimmed.csv', '9.7_9.8_trimmed.csv',
-            '9.8_9.9_trimmed.csv', '9.9_10.0_trimmed.csv',
-            '10.0_10.1_trimmed.csv', '10.1_10.2_trimmed.csv',
-            '10.2_10.3_trimmed.csv', '10.3_10.4_trimmed.csv',
-            '10.4_10.5_trimmed.csv', '10.5_10.6_trimmed.csv',
-            '10.6_10.7_trimmed.csv', '10.7_10.8_trimmed.csv',
-            '10.8_10.9_trimmed.csv', '10.9_11.0_trimmed.csv',
-            '11.0_11.1_trimmed.csv', '11.1_11.2_trimmed.csv',
-            '11.2_11.3_trimmed.csv', '11.3_11.4_trimmed.csv',
-            '11.4_11.5_trimmed.csv', '11.5_11.6_trimmed.csv',
-            '11.6_11.7_trimmed.csv', '11.7_11.8_trimmed.csv',
-            '11.8_11.9_trimmed.csv', '11.9_12.0_trimmed.csv']
+fileList = [] ### put file names here. ex: '8.0_8.1_trimmed.csv'
 
-### set up histogram
+### Set up a histogram
 numBins = 250
 binMin = -2
 binMax = 2
@@ -34,7 +15,7 @@ binSize = (binMax - binMin)/(numBins*1.0)
 tickMarks = np.linspace(binMin, binMax, numBins)
 hist = np.zeros(numBins)
 
-### define a function to add data to an exisiting histogram
+### Define a function to add data to an existing histogram
 def addData(histogram, dataPoint):
    bin_num = int(np.floor((dataPoint-binMin)/binSize))
    if ((bin_num >= 0) & (bin_num < numBins)):
@@ -46,12 +27,12 @@ def PassFilter(frequencyArr, kspaceData, cutoffFreq):
     for i in range(0, len(frequencyArr)):
         if abs(frequencyArr[i]) >= cutoffFreq:
             kspaceData.imag[i] = 0
-##        if abs(frequencyArr[i]) >= 2: #for even terms
+##        if abs(frequencyArr[i]) >= 2: #change here directly for the cutoffFreq of even terms
 ##            kspaceData.real[i] = 0
     return kspaceData
 
 
-### calculate error bar and <z>
+### Calculate error bar and <z>
 S_avez = np.zeros(len(fileList))
 avez = np.zeros(len(fileList))
 phi_tick = np.zeros(len(fileList))
