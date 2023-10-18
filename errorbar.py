@@ -58,7 +58,9 @@ for i in range (0, len(fileList)):
     zf = tickMarks*lowpassz
     avez[i] = np.sum(zf)/np.sum(lowpassz)
 
-### Plot every radial bin
+    difference = nhist - lowpassz ### only for investigating the effects of OLPF
+
+### Compare regular fft, lowpass fft, and raw data for every radial bin
 ##    plt.plot(tickMarks, xspaceData, 'b-', markersize = 0.1)
 ##    plt.plot(tickMarks, lowpassz, 'k.', markersize = 1.4)
 ##    plt.plot(tickMarks, nhist, 'r--', markersize = 0.1)
@@ -97,6 +99,15 @@ plt.xlabel('R (kpc)')
 plt.ylabel('<z> (kpc)')
 ##plt.savefig('error bar Fig_R[8.0_12.0]_L[225_245] G smaller than 18.pdf')
 plt.show()
+
+### Investigate the effects of OLPF
+plt.plot(tickMarks, difference, '.', markersize = 2.3)
+plt.xlabel('z (kpc)')
+plt.ylabel('Normalized counts')
+plt.title ('Normalized Unfiltered Star Counts Subtracting Filtered (odd cutoff 0.5)' + str(i+1))
+plt.savefig('Normalized Unfiltered-Filtered (odd cutoff 0.5)' + str(i+1) + '.pdf')
+plt.show()
+
 
     
     
