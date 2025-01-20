@@ -6,7 +6,7 @@ public class VerletIntegration {
     static final int SIZE = 5;               // number of masses
     static final int iteration = 10;
 
-    // Arrays for masses, positions, velocities
+    // Arrays for masses, positions, and velocities
     static final double[] M     = {100, 200, 150, 300, 500}; // solar masses
     static final double[] X     = {10,  20,  30,  40,   50}; // pc (x positions)
     static final double[] Z     = {-30, 20,  10,  30,  -10}; // pc (initial z positions)
