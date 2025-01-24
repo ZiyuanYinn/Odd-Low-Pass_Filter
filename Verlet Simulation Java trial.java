@@ -32,7 +32,7 @@ public class VerletIntegration {
     static final double PC_TO_KM = 3.0856e13;
 
 
-    // --------------------------------------------------------
+
     // Compute z-acceleration on the i-th mass from the j-th mass
     private static double accelFromMass(double xi, double xj, double zi, double zj, double mj) {
         /*
@@ -64,7 +64,7 @@ public class VerletIntegration {
     }
 
 
-    // --------------------------------------------------------
+
     // Compute the z-acceleration due to the background mass
     // (i.e., partial derivative of the background potential).
     private static double accelFromBackground(double x, double z) {
@@ -72,11 +72,9 @@ public class VerletIntegration {
            The background potential is:
                phi_b = - G * BM / sqrt( x^2 + ( sqrt(z^2 + b^2 ) + a )^2 )
 
-           The z-acceleration is - d/dz(phi_b).  One can work it out
-           explicitly, or replicate the symbolic result from your Python code.
+           The z-acceleration is - d/dz(phi_b).
 
-           If we do it explicitly, the final form (in km/s^2) is typically:
-
+          
                a_b_z = - G * BM * d/dz(1/R)      / PC_TO_KM
                       = - G * BM / (R^2) * dR/dz / PC_TO_KM
 
@@ -106,7 +104,7 @@ public class VerletIntegration {
     }
 
 
-    // --------------------------------------------------------
+
     // Zaccel: total z-acceleration for each mass at given Z-list
     private static double[] Zaccel(double[] currentZ) {
         double[] acceleration = new double[SIZE];
@@ -128,7 +126,6 @@ public class VerletIntegration {
     }
 
 
-    // --------------------------------------------------------
     // Compute the initial positions after the first step
     // (from the usual Verlet "first step" formula).
     private static double[] firstStep() {
@@ -158,11 +155,10 @@ public class VerletIntegration {
     }
 
 
-    // --------------------------------------------------------
+
     // Perform the full Verlet integration
     private static double[][] timeStep(double[] zPrev, double[] zCurr) {
-        // We'll store all positions in an array of length (iteration+2).
-        // each entry is an array [z1, z2, ..., zSIZE].
+
         double[][] positions = new double[iteration + 2][];
         
         // positions[0] -> initial
@@ -195,7 +191,6 @@ public class VerletIntegration {
     }
 
 
-    // --------------------------------------------------------
     // Main method to run
     public static void main(String[] args) {
 
@@ -215,7 +210,7 @@ public class VerletIntegration {
 
         // Print out the results
         // positionArray[i] is the array of z-values (length = SIZE) at timeTick[i].
-        // For demonstration:
+
         for (int i = 0; i < positionArray.length; i++) {
             System.out.printf("t = %.3e s:\t", timeTick[i]);
             for (int j = 0; j < SIZE; j++) {
