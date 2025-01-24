@@ -9,3 +9,6 @@ CREATE TABLE spatial_data (
 
 CREATE INDEX idx_spatial_coordinates ON spatial_data (l, b);
 CREATE INDEX idx_parallax ON spatial_data (parallax);
+
+
+*.sql linguist-detectable=true
